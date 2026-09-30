@@ -1,0 +1,6 @@
+{
+    "repeated_login_threshold": 3,
+    "account_targeting_threshold": 3,
+    "login_burst_threshold": 3,
+    "login_burst_window_seconds": 60
+}
