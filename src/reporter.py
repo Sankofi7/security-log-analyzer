@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 
 
@@ -125,7 +126,15 @@ def save_json_report(
         report["alerts"]["login_burst"].append(
             alert_copy
         )
+    output_directory = os.path.dirname(
+        output_file
+    )
 
+    if output_directory:
+        os.makedirs(
+            output_directory,
+            exist_ok=True
+        )
     with open(output_file, "w") as file:
         json.dump(
             report,

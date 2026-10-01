@@ -4,7 +4,37 @@ from src.parser import parse_failed_login
 
 
 class TestParser(unittest.TestCase):
+    def test_parse_ubuntu_iso_failed_login(self):
+        line = (
+            "2026-10-01T16:41:49.619910+00:00 "
+            "sankofi sshd[8028]: "
+            "Failed password for admin "
+            "from 172.16.112.1 port 52952 ssh2"
+        )
 
+        result = parse_failed_login(line)
+
+        self.assertIsNotNone(result)
+        self.assertEqual(
+            result["username"],
+            "admin"
+        )
+        self.assertEqual(
+            result["ip_address"],
+            "172.16.112.1"
+        )
+        self.assertEqual(
+            result["timestamp"].year,
+            2026
+        )
+        self.assertEqual(
+            result["timestamp"].month,
+            10
+        )
+        self.assertEqual(
+            result["timestamp"].day,
+            1
+        )
     def test_valid_failed_login(self):
 
         log_line = (
